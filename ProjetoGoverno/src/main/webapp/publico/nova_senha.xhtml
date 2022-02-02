@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/admin.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{emailBean.validaToken(param.token)}" />
+	</f:metadata>
+
+	<ui:define name="menu">
+		<ui:include src="/templates/admin.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="corpo">
+		<div class="card box">
+			<div class="div-cad">
+				<div class="img-cad">
+					<h:graphicImage library="imagens" name="cadastro.png" />
+					<br />
+				</div>
+				<div class="form-cad">
+					<h:form id="cadastro" rendered="#{emailBean.usuario != null}">
+						<p class="title-cad">Recuperar Senha</p>
+						<br />
+
+						<label for="nome">Senha</label>
+						<br />
+						<h:inputSecret id="senha" label="Senha"
+							value="#{emailBean.novaSenha}" size="10" maxlength="10"
+							 redisplay="true">
+						</h:inputSecret>
+						<br />
+
+						<label for="nome">Confirmar senha</label>
+						<br />
+						<h:inputSecret id="confirmarsenha" label="Confirmar Senha"
+							value="#{emailBean.confirmarNovaSenha}" size="10" maxlength="10"
+						 redisplay="true" />
+						<br />
+						<p:messages for="Erros" showDetail="true" autoUpdate="true"
+						closable="true" />
+
+						<p>Requisitos de senha:</p>
+						<ul>
+							<li>No mínimo 8 caracteres e no máximo 10</li>
+							<li>No mínimo uma letra maiúscula e uma minúscula</li>
+							<li>No mínimo um número</li>
+							<li>No mínimo 1 caractere especial</li>
+						</ul>
+
+						<br />
+						<div class="botoes-cad">
+							<h:commandButton className="button"
+								action="#{emailBean.salvarNovaSenha}" value="Salvar" />
+
+							<a href="/medprice/index.jsf">Cancelar</a>
+						</div>
+					</h:form>
+					<h:form rendered="#{emailBean.usuario == null}">
+						<h1 style="color: red; text-align: center">Token Inválido.</h1>
+						<p>Não é possivel realizar a recuperação! Esse link está
+							inválido,</p>
+						<p>
+							Solicite um novo Token.
+							<p:commandLink value="Aqui" styleClass="btn-login-rec"
+								onclick="PF('recupera').show();" id="btn-recupera">
+							</p:commandLink>
+						</p>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<ui:include src="/templates/modal_recupera_senha.xhtml"></ui:include>
+	</ui:define>
+</ui:composition>
+
+</html>

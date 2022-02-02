@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+<title> Governamental</title>
+<link rel="stylesheet" type="text/css" href="resources/Layout/Tela_1.css"/>
+</h:head>
+
+<h:body>
+<div class="caixa">
+<img src="resources/imagens/dados.png" id="foto1"/>
+<br/>
+<div class="box">
+<h1> Contas Públicas </h1>
+<br/>
+<h:form>
+
+<h:commandLink action="#{usuarioBean.novo}">
+<button class="comando1">Novo usuário </button>
+</h:commandLink>
+<br/>
+<br/>
+
+<h:outputLink value="publico/login.jsf">Logar usuário</h:outputLink>
+
+</h:form>
+
+</div>
+</div>
+</h:body>
+</html>
